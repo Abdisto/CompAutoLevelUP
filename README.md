@@ -6,9 +6,10 @@ Installation
 test if python is installed with $python in your terminal
 
 U are shure python is installen, then follow these instructions
-git clone https://github.com/BlacklightYT/CompAutoLevelUP.git
-cd CompAutoLevelUP
-pip install -r requirements.txt
+
+$```git clone https://github.com/BlacklightYT/CompAutoLevelUP.git```
+$```cd CompAutoLevelUP```
+$```pip install -r requirements.txt```
 
 Now the dependecies are installed you should be able to run this script
 python Comp_Makro.py 
