@@ -7,7 +7,8 @@ Test if python is installed with ```$python``` in your terminal
 
 U made shure python is installed, then follow these instructions
 
-```git clone https://github.com/BlacklightYT/CompAutoLevelUP.git
+```
+git clone https://github.com/BlacklightYT/CompAutoLevelUP.git
 cd CompAutoLevelUP
 pip install -r requirements.txt
 ```
