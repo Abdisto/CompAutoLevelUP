@@ -3,10 +3,9 @@ Tired of not having the doctrins or skins you want to have in "Company of Heroes
 
 **Installation**
 
-Test if python is installed with ```$python``` in your terminal
+Test if python is installed with ```$python``` in your terminal.
 
 U made shure python is installed, then follow these instructions
-
 ```
 git clone https://github.com/BlacklightYT/CompAutoLevelUP.git
 cd CompAutoLevelUP
