@@ -11,9 +11,10 @@ git clone https://github.com/BlacklightYT/CompAutoLevelUP.git
 cd CompAutoLevelUP
 pip install -r requirements.txt
 ```
-Now the dependecies are installed you should be able to run this script
+Now the dependecies are installed and you should be able to run this script
+```
 python Comp_Makro.py 
-
+```
 Now you have to start the script with the requiered keypress
 Tab inside the Game and enjoy! <3
 For the script to properly work, the Monitor needs to be turned on
