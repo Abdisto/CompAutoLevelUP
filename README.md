@@ -1,15 +1,15 @@
 # CompAutoLevelUP
 Tired of not having the doctrins or skins you want to have in "Company of Heroes II"? The solution is simple. Just make a script fighting against a bot that kills him in 5 minutes with the help of a cheat menue (available on the steam workshop). Or just download this python script to avoid doing your own script.
 
-Installation
+**Installation**
 
-test if python is installed with $python in your terminal
+Test if python is installed with ```$python``` in your terminal
 
-U are shure python is installen, then follow these instructions
+U made shure python is installed, then follow these instructions
 
-$```git clone https://github.com/BlacklightYT/CompAutoLevelUP.git```
-$```cd CompAutoLevelUP```
-$```pip install -r requirements.txt```
+```git clone https://github.com/BlacklightYT/CompAutoLevelUP.git```
+```cd CompAutoLevelUP```
+```pip install -r requirements.txt```
 
 Now the dependecies are installed you should be able to run this script
 python Comp_Makro.py 
