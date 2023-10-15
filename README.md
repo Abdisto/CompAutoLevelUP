@@ -10,6 +10,7 @@ U made shure python is installed, then follow these instructions
 git clone https://github.com/BlacklightYT/CompAutoLevelUP.git
 cd CompAutoLevelUP
 pip install -r requirements.txt
+
 ```
 Now the dependecies are installed and you should be able to run this script
 ```
