@@ -17,24 +17,12 @@ def main():
 	currentMouseX, currentMouseY = py.position()
 	print(currentMouseX, currentMouseY)
 
-	
 	py.moveTo(882*factor, 555*factor)
 
 	print(currentMouseX, currentMouseY)
-	
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
-	print(screenHeight)
+	#will only change with the second time
 
+# not working while code is running -> resorting back to keyboard interupt
 def stop_code():
     # Hier wird der Code für die Beendigung gestartet
     print("Code beendet")
