@@ -4,20 +4,58 @@
 import pyautogui as py
 import trio, sys
 import time                 
-import asyncio
+import os
 from datetime import datetime
-from pynput import keyboard
+import keyboard
+import pprint
+sys.path.append(os.path.realpath("."))
+import inquirer
 
-#config
-start_key = "<strg+alt+i>"
-close_key = "<strg+alt+q> | not working whilst makro started"
-print("to start, press:", start_key, "\nto exit the programm, press:", close_key)
+configuration = [
+    inquirer.List(
+        "config",
+        message="What should the programm do?",
+        choices=[("Exit Programm after 12 Iteration", 0), ("Exit Programm after 1 Iteration", 1), ("Shutdown Computer after 12 Iterations", 2)],
+    ),
+]
+config = inquirer.prompt(configuration)
+
+start_key = "Ctrl+Alt+I"
+close_key = "Ctrl+C"
+print("To start, press:", start_key, "\nTo exit the programm, press:", close_key)
+
+def main():
+    screenWidth, screenHeight = py.size()
+    #Faktor zur Umrechnung der Koordinaten fÃ¼r die moveTo() Funktion
+    factor = float(1.0)
+    if screenHeight != 1080:
+        factor == 1+(1080/screenHeight)
+
+    i = 0
+    while True:
+        if config == 0:
+            if i == 12:
+                print("Prgramm finished successfull")
+                sys.exit()
+        elif config == 1:
+            if i == 1:
+                print("Prgramm finished successfull")
+                sys.exit()
+        elif config ==2:
+            if i == 12:
+                print("Guten Morgen Piz")
+                os.system("shutdown /s /t 10") 
+
+        print(i+1, ". Iteration")
+        time.sleep(5)
+        makro()          
+        i+=1
 
 def searchPicture(picture_name,  message, confidence):
     location = None
     while (location == None):
         try:
-            location = py.locateCenterOnScreen(picture_name, confidence = confidence)
+            location = py.locateCenterOnScreen(picture_name.screenHeight.jpg, confidence = confidence)
             time.sleep(1)
             py.click()     #Kein Plan ob das funktioniert
             confidence -= 0.001
@@ -31,7 +69,7 @@ def searchPicture_2(picture_name,  message, confidence):
     location = None
     while (location == None):
         try:
-            location = py.locateCenterOnScreen(picture_name, confidence = confidence)
+            location = py.locateCenterOnScreen(picture_name.screenHeight.jpg, confidence = confidence)
             confidence -= 0.001
         except Exception as e:
             print(e)
@@ -40,49 +78,43 @@ def searchPicture_2(picture_name,  message, confidence):
     py.click()
 
 def makro():
-      
-    i = 1
-    while True:
-        print(i, ". Itteration")
-        time.sleep(5)
 
     #start game
-        searchPicture("start.jpg", "Starte Spiel |", 0.60) 
-    #move mouse to center
-        screenWidth, screenHeight = py.size()
-        py.moveTo(screenWidth/2, screenHeight/2)
-    #click "Beliebige Taste drücken"
-        searchPicture("taste.jpg", "Starte Match |", 0.60) 
-    #Base of enemy            
-        searchPicture("base.jpg", "Gegnerische Basis anvisiert |", 0.60)  
-    #spawnen troups
-        searchPicture_2("cheat.jpg", "Cheat Menü geöffnet |", 0.60)   
-        searchPicture_2("ostheer.jpg", "Ostheer ausgewählt |", 0.80)   
-        searchPicture_2("infantry.jpg", "Infantry ausgewählt |", 0.80)   
-        searchPicture_2("grenadiere.jpg", "Grenadiere gespawnt |", 0.80)
-    #move mouse to center
-        screenWidth, screenHeight = py.size()
-        py.moveTo(screenWidth/2, screenHeight/2)           
-    #wait 5 minutes
-        time.sleep(300)
-    #destroy enemy base
-        searchPicture_2("misk.jpg", "misk ausgewählt |", 0.80)   
-        searchPicture_2("kill_everything.jpg", "kill everything ausgewählt |", 0.80)   
-        searchPicture_2("radius_15m.jpg", "Alles im Radius von 15 metern zersört |", 0.90) 
-    #move mouse to center
-        screenWidth, screenHeight = py.size()
-        py.moveTo(screenWidth/2, screenHeight/2)
-    #clicking until "Match beenden" appears
-        searchPicture("beenden.jpg", "Match beendet |", 0.80)   
-    #close statistics
-        searchPicture("close.jpg", "Match schließen|", 0.80)
-    #move mouse to center
-        screenWidth, screenHeight = py.size()
-        py.moveTo(screenWidth/2, screenHeight/2)
-                      
-        i+=1
+        searchPicture("start", "Start Game |", 0.60) 
 
-        #Timer schlägt 5 Minuten
+    #click "Taste drï¿½cken"
+        searchPicture("button", "Start Match |", 0.60) 
+
+    #spawn enemy grenadiers in your base
+            
+
+    #Base of enemy            
+    #    searchPicture("base", "Gegnerische Basis anvisiert |", 0.60)  
+
+    #spawnen troups
+        searchPicture_2("cheat", "Cheat Menï¿½ geï¿½ffnet |", 0.60)   
+        searchPicture_2("ostheer", "Ostheer ausgewï¿½hlt |", 0.80)   
+        searchPicture_2("infantry", "Infantry ausgewï¿½hlt |", 0.80)   
+        searchPicture_2("grenadiere", "Grenadiere gespawnt |", 0.80)
+
+    #wait 5 minutes
+        time.sleep(300) # exact is like 295 for me but lag could be in the way so i am being generous
+
+    #destroy enemy base
+        #searchPicture_2("misk.jpg", "misk ausgewï¿½hlt |", 0.80)   
+        #searchPicture_2("kill_everything.jpg", "kill everything ausgewï¿½hlt |", 0.80)   
+        #searchPicture_2("radius_15m.jpg", "Alles im Radius von 15 metern zersï¿½rt |", 0.90)
+
+    #Match verlassen
+        time.sleep(7)
+        keyboard.press(Key.Enter)
+        keyboard.type("/v")
+        keyboard.press(Key.Enter) 
+
+    #close statistics
+        searchPicture("close", "Match schlieï¿½en|", 0.80)
+
+        #Timer schlï¿½gt 5 Minuten
         #location = None
         #while (location == None):
         #    try:
@@ -91,11 +123,7 @@ def makro():
         #        print(e)   
         #print("5 Minuten vergangen")
 
-def exit():
-    sys.exit()
-#funktioniert nicht da synchron
+# Hotkeys registrieren
+keyboard.add_hotkey('Ctrl+Alt+I', main)
 
-with keyboard.GlobalHotKeys({
-        '<ctrl>+<alt>+i': makro,     
-        '<ctrl>+<alt>+q': exit}) as h:
-        h.join()    
+keyboard.wait()
