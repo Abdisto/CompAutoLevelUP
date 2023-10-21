@@ -18,10 +18,10 @@ python Comp_Makro.py
 ```
 Now you have to start the script with the required keypress
 Tab inside the Game and enjoy! <3
-For the script to properly work, the Monitor needs to be turned on
+For the script to properly work, the Monitor needs to be turned on and comp focused
 This script is far from being perfect, the current issues are:
-* We are killing the enemies base with ```misc>kill>15m``` or so, the base spawn is kind of random and it would be more sufficient to set the teams1 as winner [didn't think of that in the moment]
-* You can only use Nexus as map since we are dependent on pictures for the input
-* Didn't now that the picture resolution is this important thus it may not work out for you
+---* We are killing the enemies base with ```misc>kill>15m``` or so, the base spawn is kind of random and it would be more sufficient to set the teams1 as winner [didn't think of that in the moment]---
+---* You can only use Nexus as map since we are dependent on pictures for the input
+--* Didn't now that the picture resolution is this important thus it may not work out for you--
 
 20.10.23: The date I will try to fix it 
