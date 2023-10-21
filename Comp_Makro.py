@@ -28,7 +28,7 @@ def config():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-r", "--reconfigure", 
-        action="store_true", help="display a square of a given number")
+        action="store_true", help="reconfigure your old configs")
     args = parser.parse_args()
 
     if args.reconfigure:
