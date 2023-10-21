@@ -165,12 +165,12 @@ def makro():
         searchPicture("cheat", "Open cheat menue |", 0.60)   
         searchPicture("ostheer", "'Ostheer' slected |", 0.80)   
         searchPicture("infantry", "'Infantry' selected |", 0.80)   
-        searchPicture("grenadiers", "spawned grenadiers |", 0.80)
+        searchPicture("grenadiere", "spawned grenadiere |", 0.80)
         #making them enemies
-        searchPicture("grenadiers_symbole", "Selected the grenadiers |", 0.80)
+        searchPicture("symbol", "Selected the grenadiere |", 0.80)
         searchPicture("selection", "'Selection' selected |", 0.80)
         searchPicture("owner", "'Owner' selected |", 0.80)
-        searchPicture("enemy", "enemy grenadiers |", 0.80)
+        searchPicture("enemy", "enemy grenadiere |", 0.80)
 
     #wait 5 minutes
         time.sleep(295) #changing back because of task beforehand
