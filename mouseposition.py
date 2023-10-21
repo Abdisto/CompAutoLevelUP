@@ -17,7 +17,7 @@ def main():
 	currentMouseX, currentMouseY = py.position()
 	print(currentMouseX, currentMouseY)
 
-	py.moveTo(882*factor, 555*factor)
+	#py.moveTo(882*factor, 555*factor)
 
 	print(currentMouseX, currentMouseY)
 	#will only change with the second time
