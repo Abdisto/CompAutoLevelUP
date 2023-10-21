@@ -123,10 +123,49 @@ def main():
 
         print(i+1, ". Iteration")
         time.sleep(5)
-        makro()          
+        makro(choice, lang, res)          
         i+=1
 
-def searchPictureLang(picture_name,  message, confidence):
+def makro(choice, lang, res):
+    #start game
+    searchPictureLang("start", "Start Game |", 0.60, lang) 
+
+#click red button
+    searchPictureLang("button", "Start Match |", 0.60, lang) 
+
+#spawn enemy grenadiers in your base 
+    #spawn troups
+    searchPicture("cheat", "Open cheat menue |", 0.60)   
+    searchPicture("ostheer", "'Ostheer' slected |", 0.80)   
+    searchPicture("infantry", "'Infantry' selected |", 0.80)   
+    searchPicture("grenadiere", "spawned grenadiere |", 0.80)
+    #making them enemies
+    searchPicture("symbol", "Selected the grenadiere |", 0.80)
+    searchPicture("selection", "'Selection' selected |", 0.80)
+    searchPicture("owner", "'Owner' selected |", 0.80)
+    searchPicture("enemy", "enemy grenadiere |", 0.80)
+
+#wait 5 minutes
+    time.sleep(295) #changing back because of task beforehand
+
+#winning condition
+    searchPicture("game", "'Game,Ai,&FOW' selected |", 0.80)
+    searchPicture("end", "'End game' selected |", 0.80)
+    py.moveTo(732*factor, 373*factor)
+    searchPicture("confirm", "'confirm' selected |", 0.80)
+    time.sleep(1)
+    py.click()
+
+#leaving match
+    time.sleep(7)
+    keyboard.press(Key.Enter)
+    keyboard.type(f"/{lang}")
+    keyboard.press(Key.Enter) 
+
+#close statistics
+    searchPictureLang("close", "Closing Statistics |", 0.80, lang)
+
+def searchPictureLang(picture_name,  message, confidence, lang):
     location = None
     while (location == None):
         try:
@@ -151,47 +190,6 @@ def searchPicture(picture_name,  message, confidence):
     print(message, location)   
     py.moveTo(location)  
     py.click()    
-
-def makro():
-
-    #start game
-        searchPictureLang("start", "Start Game |", 0.60) 
-
-    #click red button
-        searchPictureLang("button", "Start Match |", 0.60) 
-
-    #spawn enemy grenadiers in your base 
-        #spawn troups
-        searchPicture("cheat", "Open cheat menue |", 0.60)   
-        searchPicture("ostheer", "'Ostheer' slected |", 0.80)   
-        searchPicture("infantry", "'Infantry' selected |", 0.80)   
-        searchPicture("grenadiere", "spawned grenadiere |", 0.80)
-        #making them enemies
-        searchPicture("symbol", "Selected the grenadiere |", 0.80)
-        searchPicture("selection", "'Selection' selected |", 0.80)
-        searchPicture("owner", "'Owner' selected |", 0.80)
-        searchPicture("enemy", "enemy grenadiere |", 0.80)
-
-    #wait 5 minutes
-        time.sleep(295) #changing back because of task beforehand
-
-    #winning condition
-        searchPicture("game", "'Game,Ai,&FOW' selected |", 0.80)
-        searchPicture("end", "'End game' selected |", 0.80)
-        py.moveTo(732*factor, 373*factor)
-        searchPicture("confirm", "'confirm' selected |", 0.80)
-        time.sleep(1)
-        py.click()
-
-    #leaving match
-        time.sleep(7)
-        keyboard.press(Key.Enter)
-        keyboard.type(f"/{lang}")
-        keyboard.press(Key.Enter) 
-
-    #close statistics
-        searchPictureLang("close", "Closing Statistics |", 0.80)
-
 
 # Hotkeys registrieren
 keyboard.add_hotkey(start_key, main)
