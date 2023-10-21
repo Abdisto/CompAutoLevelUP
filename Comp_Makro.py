@@ -55,7 +55,7 @@ def main():
     keyboard.wait()
 
 class workload:
-    def __init__(self, lang, res):
+    def __init__(self, lang, res, factor):
         self.lang = lang
         self.res = res
         
@@ -102,7 +102,7 @@ class workload:
     #winning condition
         self.searchPicture("game", "'Game,Ai,&FOW' selected |", 0.90)
         self.searchPicture("end", "'End game' selected |", 0.90)
-        py.moveTo(732*factor, 373*factor)
+        py.moveTo(732*self.factor, 373*self.factor)
         print("You win!")
         self.searchPicture("confirm", "'confirm' selected |", 0.90)
         time.sleep(1)
