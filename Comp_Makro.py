@@ -13,15 +13,109 @@ import inquirer
 import argparse
 import xml.etree.ElementTree as ET
 
-global screenHeight
-screenWidth, screenHeight = py.size()
-global start_key
-start_key = "Ctrl+Alt+I"
-global config
+def main():
+    global screenHeight
+    screenWidth, screenHeight = py.size()
+    global start_key
+    start_key = "Ctrl+Alt+I"
+    global config
 
-global choice
-global lang
-global res
+    global choice
+    global lang
+    global res
+
+    choice, lang, res = config()
+    print("To start, press:", start_key, "\nTo exit the program, press: Ctrl+C")
+
+    def run():
+        i = 0
+        w = workload(lang, res)
+
+        while True:
+            if choice == 0:
+                if i == 12:
+                    print("Prgram finished successfully")
+                    sys.exit()
+            elif choice == 1:
+                if i == 1:
+                    print("Prgram finished successfully")
+                    sys.exit()
+            elif choice ==2:
+                if i == 12:
+                    print("Guten Morgen Piz")
+                    os.system("shutdown /s /t 10") 
+
+            print(i+1, ". Iteration")
+            time.sleep(2)
+            w.makro()         
+            i+=1
+
+    # Hotkeys registrieren
+    keyboard.add_hotkey(start_key, run)
+    keyboard.wait()
+
+class workload:
+    def __init__(self, lang, res):
+        self.lang = lang
+        self.res = res
+        
+        self.factor = float(1.0)
+        if res != 1080:
+            self.factor = (int(res)/1080)
+
+    def searchPicture(self, picture_name,  message, confidence, language="universal"):
+        language = language or self.lang
+        location = None
+        while (location == None):
+            try:
+                location = py.locateCenterOnScreen(f"{os.getcwd()}/pictures/{language}/{picture_name}_{screenHeight}.jpg", 
+                    confidence = confidence)
+                confidence -= 0.001
+            except Exception as e:
+                print(e)
+        print(message, location)   
+        py.moveTo(location)  
+        py.click()
+
+    def makro(self):
+        #start game
+        self.searchPicture("start", "Start Game |", 0.60, language=None) 
+
+    #click red button
+        self.searchPicture("button", "Start Match |", 0.80, language=None) 
+
+    #spawn enemy grenadiers in your base 
+        #spawn troups
+        self.searchPicture("cheat", "Open cheat menue |", 0.90)   
+        self.searchPicture("ostheer", "'Ostheer' slected |", 0.90)   
+        self.searchPicture("infantry", "'Infantry' selected |", 0.90)   
+        self.searchPicture("grenadiere", "spawned grenadiere |", 0.90)
+        #making them enemies
+        self.searchPicture("symbol", "Selected the grenadiere |", 0.90)
+        self.searchPicture("selection", "'Selection' selected |", 0.90)
+        self.searchPicture("owner", "'Owner' selected |", 1.00)
+        self.searchPicture("enemy", "enemy grenadiere |", 0.90)
+
+    #wait 5 minutes
+        time.sleep(295) #changing back because of task beforehand
+
+    #winning condition
+        self.searchPicture("game", "'Game,Ai,&FOW' selected |", 0.90)
+        self.searchPicture("end", "'End game' selected |", 0.90)
+        py.moveTo(732*factor, 373*factor)
+        print("You win!")
+        self.searchPicture("confirm", "'confirm' selected |", 0.90)
+        time.sleep(1)
+        py.click()
+
+    #leaving match
+        time.sleep(7)
+        py.press("enter")
+        py.write(f"/{self.lang}")
+        py.press("enter") 
+
+    #close statistics
+        self.searchPicture("close", "Closing Statistics |", 0.80, language=None)
 
 def config():
     file_exists = os.path.exists(f"{os.getcwd()}/config.xml")
@@ -32,7 +126,6 @@ def config():
     args = parser.parse_args()
 
     if args.reconfigure:
-        print("a")
         file_exists = False
 
     if file_exists == False:
@@ -74,24 +167,17 @@ def config():
         cl = ET.Element("Configurations")
 
         ET.SubElement(cl, "choice").text = str(choice['choice'])
-
         ET.SubElement(cl, "language").text = lang['lang']
-
         ET.SubElement(cl, "resolution").text = str(res['res'])
 
         root.append(cl)  # Append the "Configurations" element to the "Config" element
-
         tree = ET.ElementTree(root)
         with open("config.xml", "wb") as files:
             tree.write(files)
 
-config()
-print("To start, press:", start_key, "\nTo exit the program, press: Ctrl+C")
+        return choice["choice"], lang["lang"], res["res"]  # Return values when creating a new config
 
-def main():
-    #reading from config.xml
-    file_exists = os.path.exists(f"{os.getcwd()}/config.xml")
-    if file_exists == True:
+    else:
         print("Reading from config file")
         tree = ET.parse("config.xml")
         root = tree.getroot()
@@ -100,100 +186,7 @@ def main():
         lang = root.find(".//language").text
         res = root.find(".//resolution").text
 
-    #factor to convert the coordinates for the moveTo() function corresponding to the resolution of the monitor
-    global factor
-    factor = float(1.0)
-    if res != 1080:
-        factor = (int(res)/1080)
+        return choice, lang, res
 
-    i = 0
-    while True:
-        if choice == 0:
-            if i == 12:
-                print("Prgram finished successfully")
-                sys.exit()
-        elif choice == 1:
-            if i == 1:
-                print("Prgram finished successfully")
-                sys.exit()
-        elif choice ==2:
-            if i == 12:
-                print("Guten Morgen Piz")
-                os.system("shutdown /s /t 10") 
-
-        print(i+1, ". Iteration")
-        time.sleep(2)
-        makro(choice, lang, res)          
-        i+=1
-
-def makro(choice, lang, res):
-    #start game
-    searchPictureLang("start", "Start Game |", 0.60, lang) 
-
-#click red button
-    searchPictureLang("button", "Start Match |", 0.80, lang) 
-
-#spawn enemy grenadiers in your base 
-    #spawn troups
-    searchPicture("cheat", "Open cheat menue |", 0.90)   
-    searchPicture("ostheer", "'Ostheer' slected |", 0.90)   
-    searchPicture("infantry", "'Infantry' selected |", 0.90)   
-    searchPicture("grenadiere", "spawned grenadiere |", 0.90)
-    #making them enemies
-    searchPicture("symbol", "Selected the grenadiere |", 0.90)
-    searchPicture("selection", "'Selection' selected |", 0.90)
-    searchPicture("owner", "'Owner' selected |", 1.00)
-    searchPicture("enemy", "enemy grenadiere |", 0.90)
-
-#wait 5 minutes
-    time.sleep(295) #changing back because of task beforehand
-
-#winning condition
-    searchPicture("game", "'Game,Ai,&FOW' selected |", 0.90)
-    searchPicture("end", "'End game' selected |", 0.90)
-    py.moveTo(732*factor, 373*factor)
-    currentMouseX, currentMouseY = py.position()
-    print(currentMouseX, currentMouseY)
-    print("You win!")
-    searchPicture("confirm", "'confirm' selected |", 0.90)
-    time.sleep(1)
-    py.click()
-
-#leaving match
-    time.sleep(7)
-    py.press("enter")
-    py.write(f"/{lang}")
-    py.press("enter") 
-
-#close statistics
-    searchPictureLang("close", "Closing Statistics |", 0.80, lang)
-
-def searchPictureLang(picture_name,  message, confidence, lang):
-    location = None
-    while (location == None):
-        try:
-            location = py.locateCenterOnScreen(f"{os.getcwd()}/pictures/{lang}/{picture_name}_{screenHeight}.jpg", 
-                confidence = confidence)
-            confidence -= 0.001
-        except Exception as e:
-            print(e)
-    print(message, location)   
-    py.moveTo(location)  
-    py.click()
-
-def searchPicture(picture_name,  message, confidence):
-    location = None
-    while (location == None):
-        try:
-            location = py.locateCenterOnScreen(f"{os.getcwd()}/pictures/universal/{picture_name}_{screenHeight}.jpg", 
-                confidence = confidence)
-            confidence -= 0.001
-        except Exception as e:
-            print(e)
-    print(message, location)   
-    py.moveTo(location)  
-    py.click()    
-
-# Hotkeys registrieren
-keyboard.add_hotkey(start_key, main)
-keyboard.wait()
+if __name__ == "__main__":
+    main()
