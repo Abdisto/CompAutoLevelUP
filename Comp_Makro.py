@@ -24,7 +24,8 @@ def config():
     file_exists = os.path.exists(f"{os.getcwd()}/config.xml")
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--reconfigure", action="store_true", help="display a square of a given number")
+    parser.add_argument("-r", "--reconfigure", 
+        action="store_true", help="display a square of a given number")
     args = parser.parse_args()
 
     if args.reconfigure:
@@ -37,8 +38,10 @@ def config():
         choices = [
             inquirer.List(
                 "choice",
-                message="What should the programm do?",
-                choices=[("Exit Programm after 12 Iteration", 0), ("Exit Programm after 1 Iteration", 1), ("Shutdown Computer after 12 Iterations", 2)],
+                message="What should the program do?",
+                choices=[("Exit Program after 12 Iteration", 0), 
+                ("Exit Program after 1 Iteration", 1), 
+                ("Shutdown Computer after 12 Iterations", 2)],
             ),
         ]
         global choice
@@ -58,7 +61,8 @@ def config():
             inquirer.List(
                 "res",
                 message="With which resolution are you playing?",
-                choices=[("1440p", 1440), ("1080p", 1080), (f"{screenHeight}p", screenHeight)],
+                choices=[("1440p", 1440), ("1080p", 1080), 
+                (f"{screenHeight}p", screenHeight)],
             ),
         ]
         global res
@@ -92,7 +96,7 @@ def config():
         return choice, lang, resolution
 
 config()
-print("To start, press:", start_key, "\nTo exit the programm, press: Ctrl+C")
+print("To start, press:", start_key, "\nTo exit the program, press: Ctrl+C")
 
 def main():
 
@@ -106,11 +110,11 @@ def main():
     while True:
         if choice == 0:
             if i == 12:
-                print("Prgramm finished successfully")
+                print("Prgram finished successfully")
                 sys.exit()
         elif choice == 1:
             if i == 1:
-                print("Prgramm finished successfully")
+                print("Prgram finished successfully")
                 sys.exit()
         elif choice ==2:
             if i == 12:
@@ -126,7 +130,8 @@ def main():
         location = None
         while (location == None):
             try:
-                location = py.locateCenterOnScreen(f"{os.getcwd()}/pictures/{lang}/{picture_name}_{screenHeight}.jpg", confidence = confidence)
+                location = py.locateCenterOnScreen(f"{os.getcwd()}/pictures/{lang}/{picture_name}_{screenHeight}.jpg", 
+                    confidence = confidence)
                 confidence -= 0.001
             except Exception as e:
                 print(e)
@@ -138,7 +143,8 @@ def main():
         location = None
         while (location == None):
             try:
-                location = py.locateCenterOnScreen(f"{os.getcwd()}/pictures/universal/{picture_name}_{screenHeight}.jpg", confidence = confidence)
+                location = py.locateCenterOnScreen(f"{os.getcwd()}/pictures/universal/{picture_name}_{screenHeight}.jpg", 
+                    confidence = confidence)
                 confidence -= 0.001
             except Exception as e:
                 print(e)
