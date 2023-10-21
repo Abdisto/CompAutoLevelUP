@@ -14,11 +14,15 @@ pip install -r requirements.txt
 ```
 Now the dependencies are installed and you should be able to run this script
 ```
-python Comp_Makro.py 
+python Comp_Makro.py
+```
+If you want to change your current configs just add the ```-r``` flag
+```
+python Comp_Makro.py -r
 ```
 Now you have to start the script with the required keypress
 Tab inside the Game and enjoy! <3
 For the script to properly work, the Monitor needs to be turned on and comp focused
 
 20.10.23: The date I will try to fix it ✔ [finished at 03:40 o'clock]
-todo: adding all the images (english/1440, english/1080)
+Todo: adding all the images (english/1440, english/1080)
