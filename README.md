@@ -20,11 +20,11 @@ If you want to change your current configs just add the ```-r``` flag
 ```
 python Comp_Makro.py -r
 ```
-Now you have to start the script with the required keypress
-Tab inside the Game and enjoy! <3
-For the script to properly work, the Monitor needs to be turned on and comp focused
+Now you have to start the script with the required keypress  
+Tab inside the Game and enjoy! <3  
+For the script to properly work, the Monitor needs to be turned on and comp focused  
 
-20.10.23: The date I will try to fix it ✔ [finished at 03:40 o'clock]<br>
-what was added:<br>
-it's late m8 -_-<br>
-Todo: adding all the images (english/1440, english/1080)
+20.10.23: The date I will try to fix it ✔ [finished at 03:40 o'clock]  
+what was added:  
+it's late m8 -_-  
+Todo: adding all the images (english/1440, english/1080)  
