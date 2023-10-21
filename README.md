@@ -27,5 +27,5 @@ For the script to properly work, the Monitor needs to be turned on and comp focu
 20.10.23: The date I will try to fix it ✔ [finished at 03:40 o'clock]  
 what was added:  
 it's late m8 -_-  
-
+  
 Todo: adding all the images (english/1440, english/1080)  
