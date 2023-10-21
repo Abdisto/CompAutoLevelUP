@@ -158,9 +158,9 @@ def makro(choice, lang, res):
 
 #leaving match
     time.sleep(7)
-    keyboard.press(Key.Enter)
-    keyboard.type(f"/{lang}")
-    keyboard.press(Key.Enter) 
+    py.press("enter")
+    py.write(f"/{lang}")
+    py.press("enter") 
 
 #close statistics
     searchPictureLang("close", "Closing Statistics |", 0.80, lang)
