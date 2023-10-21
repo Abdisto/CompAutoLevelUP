@@ -15,11 +15,13 @@ import xml.etree.ElementTree as ET
 
 global screenHeight
 screenWidth, screenHeight = py.size()
+global start_key
+start_key = "Ctrl+Alt+I"
+global config
+
 global choice
 global lang
 global res
-global start_key
-global config
 
 def config():
     file_exists = os.path.exists(f"{os.getcwd()}/config.xml")
@@ -84,7 +86,6 @@ def config():
             tree.write(files)
 
 config()
-start_key = "Ctrl+Alt+I"
 print("To start, press:", start_key, "\nTo exit the program, press: Ctrl+C")
 
 def main():
