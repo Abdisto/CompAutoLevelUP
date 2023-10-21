@@ -12,15 +12,15 @@ def main():
 	factor = float(1.0)
 
 	if screenHeight != 1080:
-		factor == 1+(1080/screenHeight)
-
+		factor = (int(screenHeight)/1080)
+	print(factor)
 	currentMouseX, currentMouseY = py.position()
 	print(currentMouseX, currentMouseY)
 
-	#py.moveTo(882*factor, 555*factor)
+	py.moveTo(732*factor, 373*factor)
 
+	currentMouseX, currentMouseY = py.position()
 	print(currentMouseX, currentMouseY)
-	#will only change with the second time
 
 # not working while code is running -> resorting back to keyboard interupt
 def stop_code():

@@ -64,7 +64,7 @@ def config():
                 "res",
                 message="With which resolution are you playing?",
                 choices=[("1440p", 1440), ("1080p", 1080), 
-                (f"{screenHeight}p", screenHeight)],
+                (f"{screenHeight}p (auto generated)", screenHeight)],
             ),
         ]
         res = inquirer.prompt(resolution)
@@ -104,7 +104,7 @@ def main():
     global factor
     factor = float(1.0)
     if res != 1080:
-        factor = 1+(1080/int(res))
+        factor = (int(res)/1080)
 
     i = 0
     while True:
@@ -122,7 +122,7 @@ def main():
                 os.system("shutdown /s /t 10") 
 
         print(i+1, ". Iteration")
-        time.sleep(5)
+        time.sleep(2)
         makro(choice, lang, res)          
         i+=1
 
@@ -131,28 +131,31 @@ def makro(choice, lang, res):
     searchPictureLang("start", "Start Game |", 0.60, lang) 
 
 #click red button
-    searchPictureLang("button", "Start Match |", 0.60, lang) 
+    searchPictureLang("button", "Start Match |", 0.80, lang) 
 
 #spawn enemy grenadiers in your base 
     #spawn troups
-    searchPicture("cheat", "Open cheat menue |", 0.60)   
-    searchPicture("ostheer", "'Ostheer' slected |", 0.80)   
-    searchPicture("infantry", "'Infantry' selected |", 0.80)   
-    searchPicture("grenadiere", "spawned grenadiere |", 0.80)
+    searchPicture("cheat", "Open cheat menue |", 0.90)   
+    searchPicture("ostheer", "'Ostheer' slected |", 0.90)   
+    searchPicture("infantry", "'Infantry' selected |", 0.90)   
+    searchPicture("grenadiere", "spawned grenadiere |", 0.90)
     #making them enemies
-    searchPicture("symbol", "Selected the grenadiere |", 0.80)
-    searchPicture("selection", "'Selection' selected |", 0.80)
-    searchPicture("owner", "'Owner' selected |", 0.80)
-    searchPicture("enemy", "enemy grenadiere |", 0.80)
+    searchPicture("symbol", "Selected the grenadiere |", 0.90)
+    searchPicture("selection", "'Selection' selected |", 0.90)
+    searchPicture("owner", "'Owner' selected |", 1.00)
+    searchPicture("enemy", "enemy grenadiere |", 0.90)
 
 #wait 5 minutes
     time.sleep(295) #changing back because of task beforehand
 
 #winning condition
-    searchPicture("game", "'Game,Ai,&FOW' selected |", 0.80)
-    searchPicture("end", "'End game' selected |", 0.80)
+    searchPicture("game", "'Game,Ai,&FOW' selected |", 0.90)
+    searchPicture("end", "'End game' selected |", 0.90)
     py.moveTo(732*factor, 373*factor)
-    searchPicture("confirm", "'confirm' selected |", 0.80)
+    currentMouseX, currentMouseY = py.position()
+    print(currentMouseX, currentMouseY)
+    print("You win!")
+    searchPicture("confirm", "'confirm' selected |", 0.90)
     time.sleep(1)
     py.click()
 
